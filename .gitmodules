@@ -1,9 +1,3 @@
-[submodule "NAS_OpenACC_2.5"]
-	path = NAS_OpenACC_2.5
-	url = https://github.com/spino327/NAS_OpenACC_2.5
-[submodule "SHOC_OpenACC_2.5"]
-	path = SHOC_OpenACC_2.5
-	url = https://github.com/spino327/SHOC_OpenACC_2.5
 [submodule "NAS"]
 	path = NAS
 	url = https://github.com/spino327/NAS_OpenACC_2.5
