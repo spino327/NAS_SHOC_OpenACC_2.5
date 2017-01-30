@@ -45,3 +45,25 @@ Compile with `make`
 
 ### NPB-OMP-C
 Compile with `make CC=pgcc CLASS=A`
+
+## Using the benchmark execution scripts (ES)
+
+To use the benchmark execution script (ES) you need to have a configuration file that describes the experiment to execute. In addition, you need to run the entry script `execExperiments.sh` with that configuration file.
+
+We have provide several configuration file examples that compile the benchmarks using PGI. It is easy to make it work with other compilers.
+
+1. The sample configuration files are at: `scripts/conf_files`.  
+2. ES are at: `scripts/execExperiments.sh` and `scripts/singleExperiment.sh`.  
+3. There are also scripts to plot the results `scripts/plot_bar.py`, `scripts/plot_boxplot.py`, `scripts/plot_indbar.py`, and `scripts/plot_scatter.py`.  
+4. There are also scripts to process raw benchmarks results to make it easier to comply with the format of the plotting scripts `scripts/processResults.sh`.  
+
+To execute an experiment using the ES. For instance to run the NAS-BT benchmark using OpenACC on a multicore:
+> $ cd script  
+> $ ./execExperiments.sh scripts/conf_files/acc_multicore/BT.conf  
+
+The results will be placed at `results/BT/BT_...`.
+
+## Compiler definitions
+
+We provide Makefile definitions that guide the compiling process. You can read and modify these build system. For NAS, these files are at `config/make.def` and `sys/make.common`. For SHOC, these files are at `crpl_conf/make.def` and `crpl_conf/make.common`.
+
