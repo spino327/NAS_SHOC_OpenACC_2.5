@@ -2,32 +2,29 @@
 
 # author: sergiop@udel.edu
 
-read -d '' USAGE <<- EOF
-    ./execExperiments.sh <conf_file>.\n
-    
-    For the configuration file:\n
-    
-    Variables formated as "export MyVAR=value":\n
-    \tEXPERIMENTS_HOME: folder where the results will be stored.\n
-    \tCC: compiler to use.\n
-    \tACCEL_INFO: command to query the accelerator info.\n
-    \tTEST: flags that will be passed to make.\n
-    \tBENCHMARK_NAME: name of the benchmark folder to create.\n
-    \tBENCHMARK_EXEC: prefix of the executed binary.\n
-    \tBENCHMARK_FOLDER: folder where the source code (.c and .h) is located.\n
-    \tDEFINES: string to be passed to make (assuming you have a DEFINES variable whithin your makefile).\n
-    \tTA: architecture to use for the gpu.\n
-    \tEXTRA_CFLAGS: extra flags to pass to the c compiler.\n
-    \tEXTRA_CLINKFLAGS: extra flags to pass to linker.\n
-
-    Variables formated as "MyVAR=value":\n
-    \tCLASSES: list of classes to use for NAS, e.g. CLASSES=A B C.\n
-    \tTHREADS: list of number of threads to use in multicore runs, e.g. THREADS=1 4.\n
-    \tENV_THREADS: env variable that sets the number of threads to use in the runtime. It depends if acc (ACC_NUM_CORES) or omp (OMP_NUM_THREADS).\n
-EOF
+function USAGE() {
+    echo "./execExperiments.sh <conf_file>."
+    echo "For the configuration file:"
+    echo "Variables formated as \"export MyVAR=value\":"
+    echo "   EXPERIMENTS_HOME: folder where the results will be stored."
+    echo "   CC: compiler to use."
+    echo "   ACCEL_INFO: command to query the accelerator info."
+    echo "   TEST: flags that will be passed to make."
+    echo "   BENCHMARK_NAME: name of the benchmark folder to create."
+    echo "   BENCHMARK_EXEC: prefix of the executed binary."
+    echo "   BENCHMARK_FOLDER: folder where the source code (.c and .h) is located."
+    echo "   DEFINES: string to be passed to make (assuming you have a DEFINES variable whithin your makefile)."
+    echo "   TA: architecture to use for the gpu."
+    echo "   EXTRA_CFLAGS: extra flags to pass to the c compiler."
+    echo "   EXTRA_CLINKFLAGS: extra flags to pass to linker."
+    echo "Variables formated as \"MyVAR=value\":"
+    echo "   CLASSES: list of classes to use for NAS, e.g. CLASSES=A B C."
+    echo "   THREADS: list of number of threads to use in multicore runs, e.g. THREADS=1 4."
+    echo "   ENV_THREADS: env variable that sets the number of threads to use in the runtime. It depends if acc (ACC_NUM_CORES) or omp (OMP_NUM_THREADS)."
+}
 
 if [ "$#" -ne "1" ]; then
-    echo -e $USAGE
+    USAGE
     exit -1
 fi
 
