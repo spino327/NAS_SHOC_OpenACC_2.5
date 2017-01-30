@@ -15,12 +15,14 @@ function USAGE() {
     echo "   BENCHMARK_FOLDER: folder where the source code (.c and .h) is located."
     echo "   DEFINES: string to be passed to make (assuming you have a DEFINES variable whithin your makefile)."
     echo "   TA: architecture to use for the gpu."
+    echo "   PXM: Program execution model to use. E.g. PXM=acc, PXM=omp."
     echo "   EXTRA_CFLAGS: extra flags to pass to the c compiler."
     echo "   EXTRA_CLINKFLAGS: extra flags to pass to linker."
     echo "Variables formated as \"MyVAR=value\":"
     echo "   CLASSES: list of classes to use for NAS, e.g. CLASSES=A B C."
     echo "   THREADS: list of number of threads to use in multicore runs, e.g. THREADS=1 4."
     echo "   ENV_THREADS: env variable that sets the number of threads to use in the runtime. It depends if acc (ACC_NUM_CORES) or omp (OMP_NUM_THREADS)."
+    echo "   BENCHMARK_SUITE: benchmark suite to used. Possible values: \"nas_cuda\", \"nas_acc\", \"nas_omp\", \"shoc\"."
 }
 
 if [ "$#" -ne "1" ]; then
@@ -33,6 +35,7 @@ CLASSES=()
 THREADS=()
 ENV_THREADS=""
 FOLDER=""
+BENCHMARK_SUITE=""
 
 echo Loading conf file
 while IFS='' read -r line || [[ -n "$line" ]]; do
@@ -81,16 +84,31 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
                 fi
             done
             ENV_THREADS=$val
+        elif [ "${line:0:15}" == "BENCHMARK_SUITE" ]; then
+            val=""
+            for ith in `seq 0 ${#line}`; do
+                letter=${line:$ith:1}
+                
+                if [ "$letter" == "=" ]; then
+                    val=${line:$[ith+1]}
+                    break
+                fi
+            done
+            BENCHMARK_SUITE=$val
         else
             eval ${line}
         fi
     fi
 done < "$CONF_FILE"
 
+if [ "$BENCHMARK_SUITE" != "nas_cuda" -a "$BENCHMARK_SUITE" != "nas_acc" -a "$BENCHMARK_SUITE" != "nas_omp" -a "$BENCHMARK_SUITE" != "shoc" ]; then
+    echo "Error BENCHMARK_SUITE needs to be: \"nas_cuda\", \"nas_acc\", \"nas_omp\", \"shoc\"."
+    exit -1
+fi
 
 if [ "$ENV_THREADS" == "" ]; then 
     # running non-multicore
-    (./singleExperiment.sh "${CLASSES[*]}") 2>&1 | tee -a logExperiments.txt
+    (./singleExperiment.sh "${CLASSES[*]}" ${BENCHMARK_SUITE}) 2>&1 | tee -a logExperiments.txt
 else
     # running multicore
     # number of threads to use
@@ -99,7 +117,7 @@ else
         for th in ${THREADS[@]}; do
             export EXTRAS="ENV_THREADS=$ENV_THREADS":"NUM_THREADS=$th"
             #export $ENV_THREADS=$th
-            (./singleExperiment.sh "${CLASSES[*]}" $ENV_THREADS $th) 2>&1 | tee -a logExperiments.txt
+            (./singleExperiment.sh "${CLASSES[*]}" ${BENCHMARK_SUITE} $ENV_THREADS $th) 2>&1 | tee -a logExperiments.txt
         done
     else
         echo "ERROR: please set the THREADS option in your config file. e.g. THREADS=1 2 4"
