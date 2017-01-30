@@ -4,3 +4,9 @@
 [submodule "SHOC"]
 	path = SHOC
 	url = https://github.com/spino327/SHOC_OpenACC_2.5
+[submodule "NPB-OMP-C"]
+	path = NPB-OMP-C
+	url = https://github.com/spino327/NPB-OMP-C-mirror
+[submodule "NPB-CUDA"]
+	path = NPB-CUDA
+	url = https://github.com/spino327/NPB-CUDA-mirror
