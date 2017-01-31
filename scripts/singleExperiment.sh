@@ -44,8 +44,10 @@ function run_nas() {
         fi
         
         if [ "$BENCHMARK_SUITE" == "nas_cuda" ]; then
+            echo "./$BENCHMARK_EXEC $CLASS" | $LOG
             (time ./$BENCHMARK_EXEC $CLASS) 2>&1 | tee -a $BASE_FOLDER/$FOLDER/res$CLASS.txt 
         else
+            echo "./$BENCHMARK_EXEC.$CLASS.x" | $LOG
             (time ./$BENCHMARK_EXEC.$CLASS.x) 2>&1 | tee -a $BASE_FOLDER/$FOLDER/res$CLASS.txt 
         fi
         
