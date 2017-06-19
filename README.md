@@ -2,6 +2,21 @@
 
 Code repository for the benchmarks discussed in our paper "Exploring translation of OpenMP to OpenACC 2.5: Lessons Learned"
 
+## Citation Information. [AsHES 2017](http://www.mcs.anl.gov/events/workshops/ashes/2017/program.php)
+Sergio Pino\*, Lori Pollock, and Sunita Chandrasekaran. Exploring translation of OpenMP to OpenACC 2.5: Lessons learned. Proceedings of the Seventh International Workshop on Accelerators and Hybrid Exascale Systems (AsHES). 2017. 
+
+There is a pre-print version in the following [link](https://www.researchgate.net/publication/314207299_Exploring_translation_of_OpenMP_to_OpenACC_25_Lessons_Learned).
+
+```
+@inproceedings{pino2017exploring,
+ title={Exploring translation of OpenMP to OpenACC 2.5: Lessons Learned},
+ author={Pino, Sergio and Pollock, Lori and Chandrasekaran, Sunita},
+ booktitle={Proceedings of the Seventh International Workshop on Accelerators and Hybrid Exascale Systems (AsHES)},
+ year={2017},
+ organization={IEEE Press}
+}
+```
+
 ## Cloning the repo
 
 We use git-submodules to checkout the the individual benchmark suites into the global project. For more info in what this means at <a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules" target="blank">Git-Tools-Submodules</a>. Thus, to successfully checkout all the required files to compile and run the benchmarks you need to do:
