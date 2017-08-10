@@ -5,8 +5,8 @@ Code repository for the benchmarks discussed in our paper "Exploring translation
 ## Citation Information. [AsHES 2017](http://www.mcs.anl.gov/events/workshops/ashes/2017/program.php)
 Sergio Pino\*, Lori Pollock, and Sunita Chandrasekaran. Exploring translation of OpenMP to OpenACC 2.5: Lessons learned. Proceedings of the Seventh International Workshop on Accelerators and Hybrid Exascale Systems (AsHES). 2017. 
 
-There is a pre-print version in the following [link](https://www.researchgate.net/publication/314207299_Exploring_translation_of_OpenMP_to_OpenACC_25_Lessons_Learned).
-
+- There is a pre-print version in the following [link](https://www.researchgate.net/publication/314207299_Exploring_translation_of_OpenMP_to_OpenACC_25_Lessons_Learned).  
+- To download the paper from IEEE [link](https://doi.org/10.1109/IPDPSW.2017.84).  
 ```
 @inproceedings{pino2017exploring,
  title={Exploring translation of OpenMP to OpenACC 2.5: Lessons Learned},
